@@ -10,8 +10,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+exec feh --bg-fill ~/.black.jpg
 exec compton
-exec feh --bg-scale ~/.half.jpg
 exec polybar example
 new_window 1pixel
 # Font for window titles. Will also be used by the bar unless a different font
@@ -19,13 +19,13 @@ new_window 1pixel
 font pango:monospace 8
 
 # class                 border  bground text    indicator child_border
-client.focused          #ff8300 #397737 #FFFFFF #2E9EF4   #ff8300
-client.focused_inactive #ff8300 #2B6A3E #FFFFFF #484E50   #ff8300
-client.unfocused        #000000 #888888 #292D2E   #222222
-client.urgent           #ff581c #277D2D #FFFFFF #900000   #ff581c
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #000000
+client.focused          #ffa200 #397737 #FFBD2A #FFBD2A   #FFBD2A
+client.focused_inactive #000000 #2B6A3E #FFBD2A #484E50   #000000
+client.unfocused        #000000 #888888 #292D2E   #222222 #556b2f
+client.urgent           #ff581c #277D2D #FFBD2A #900000   #ff581c
+client.placeholder      #000000 #0C0C0C #FFBD2A #000000   #000000
 
-client.background       #FFFFFF
+client.background       #FFBD2A
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -42,8 +42,10 @@ client.background       #FFFFFF
 floating_modifier $mod
 gaps inner 20
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
+bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+Return exec terminator
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 2+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 2- unmute"
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -83,7 +85,9 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
-
+bindsym $mod+Shift+v exec urxvt -e vim
+bindsym $mod+Shift+m exec urxvt -e ranger
+bindsym $mod+Shift+t exec thunar
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
@@ -100,9 +104,15 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
+bindsym $mod+Shift+b exec chromium
+bindsym $mod+b exec qutebrowser
 # focus the child container
 #bindsym $mod+d focus child
+bindsym $mod+p gaps inner current plus 5
+bindsym $mod+o gaps inner current minus 5
+bindsym $mod+Shift+p gaps outer current plus 5
+bindsym $mod+Shift+o gaps outer current minus 5
+
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -146,8 +156,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
+bindsym $mod+Shift+e exit
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -174,6 +183,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-https://stackoverflow.com/questions/1225839
+#https://stackoverflow.com/questions/1225839
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if availa
