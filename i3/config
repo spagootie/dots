@@ -40,17 +40,17 @@ client.background       #FFBD2A
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-gaps inner 20
+gaps inner 10
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 bindsym $mod+Shift+Return exec terminator
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 2+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 2- unmute"
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master 2%+"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master 2%-"
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -sb darkgreen -nf orange -nb black
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -85,9 +85,11 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
-bindsym $mod+Shift+v exec urxvt -e vim
-bindsym $mod+Shift+m exec urxvt -e ranger
+bindsym $mod+Shift+v exec termite -e vim
+bindsym $mod+Shift+m exec termite -e ranger
 bindsym $mod+Shift+t exec thunar
+bindsym $mod+Shift+h exec termite -e htop
+
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
@@ -104,7 +106,7 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-bindsym $mod+Shift+b exec chromium
+bindsym $mod+Shift+b exec firefox
 bindsym $mod+b exec qutebrowser
 # focus the child container
 #bindsym $mod+d focus child
