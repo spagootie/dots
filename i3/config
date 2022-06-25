@@ -1,16 +1,19 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-exec feh --bg-scale ~/.amine.jpg
+exec feh --bg-fill $(sed -n '2p' ~/.config/variety/history.txt)
+
+exec --no-startup-id variety
 exec dunst
 set $mod Mod4
 exec xbindkeys
+exec xinput --set-prop 'ASUSTeK ROG Gladius II Origin PNK LTD ' 'libinput Accel Speed' -0.8
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:Comfortaa 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
+for_window [class="Variety"] floating enable
 # start a terminal
 bindsym $mod+Return exec st
 bindsym $mod+Shift+Return exec urxvt -uc -bc
@@ -24,8 +27,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+b exec qutebrowser
 bindsym $mod+Shift+b exec firefox
 # start dmenu (a program launcher)
-#bindsym $mod+d exec rofi -show run -theme Arc-Dark
-exec albert
+bindsym $mod+d exec rofi -show run -theme Arc-Dark
 
 # change focus
 bindsym $mod+j focus left
@@ -51,8 +53,11 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 # volume keys
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
+#bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+
+#bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
 
 
 # brightness keys
@@ -198,8 +203,8 @@ hide_edge_borders none
 
 # change borders
 bindsym $mod+y border none
-bindsym $mod+u border pixel 1
-bindsym $mod+i border normal
+bindsym $mod+Shift+u border pixel 1
+bindsym $mod+Shift+i border normal
 
 
 #############################
@@ -261,5 +266,5 @@ mode "$mode_gaps_outer" {
 }
 
 
-bindsym $mod+o gaps inner current minus 5
-bindsym $mod+p gaps inner current plus 5
+bindsym $mod+Shift+o gaps inner current minus 5
+bindsym $mod+Shift+p gaps inner current plus 5
