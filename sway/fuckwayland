@@ -1,0 +1,3 @@
+#!/bin/bash
+#this file a script executed by the sway config 
+XDG_CURRENT_DESKTOP=sway systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
